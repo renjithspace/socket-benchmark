@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <title>repl.it</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.2.0/socket.io.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.11/lodash.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.js"></script>
+  </head>
+  <body>
+    <script>
+      var socket = io.connect('http://localhost:1234');
+      socket.on('news', function (data) {
+        console.log({ position: data.id, delay: moment().diff(data.start, 'second') })
+        socket.emit('news', data);
+      });
+    </script>
+  </body>
+</html>
